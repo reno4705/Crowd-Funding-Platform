@@ -1,0 +1,31 @@
+.gallery-col {
+    width: 33.33%;
+    height: 300px;
+    padding-top: 12px;
+}
+
+.gallery-img {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.gallery-head {
+    padding-top: 7px;
+}
+
+.details-row {
+    display: flex;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+
+.details-val {
+    color: #007AFF;
+    font-size: 16px;
+}
+
+.details-name {
+    font-weight: 500;
+}

@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+.sign-container {
+  display: flex;
+  gap: 200px;
+  padding: 190px;
+  font-family: "poppins", sans-serif;
+}
+
+.sign-col {
+  width: 50%;
+}
+
+.login-box {
+    width: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  
+.sign-img {
+  width: 600px;
+  padding-top: 100px;
+  padding-left: 90px;
+}
+  
+.page-head {
+    font-size: 2.2rem;
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+.input-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+.sign-input {
+    display: block;
+    margin-bottom: 20px;
+    width: 90%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #cccccc;
+    border-radius: 25px;
+  }
+  
+.sign-submit {
+    width: 150px;
+    background-color: #5995fd;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-left: 32%;
+}
+
+.sign-submit:hover {
+  background-color: #007bff;
+}
+
+.submit a {
+  color: white;
+  text-decoration: none;
+}
+  
+.check-line {
+  font-size: 18px;
+  text-align: center;
+  padding-top: 15px;
+}

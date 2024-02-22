@@ -1,0 +1,85 @@
+.logo {
+    height: 50px;
+    padding-right: 70px;
+}
+
+.serbut {
+    height: 30px;
+    padding-left: 10px;
+}
+
+* {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 5px 30px;
+    margin: 0px;
+    background-color: lightgrey;
+}
+
+.navstart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchbox {
+    padding: 4px;
+    color: #000000;
+    font-size: 18px;
+    max-width: 500px;
+}
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar li{
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+
+.navbar li a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #000000;
+    transition: 0.3s ease-in-out;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar li a:hover {
+    text-decoration: underline;
+    color: #007aff;
+}
+
+.signup-button {
+    background-color: #007aff;
+    font-size: 1.2rem;
+    border-color: transparent;
+    border-radius: 20px;
+}
+
+.signup-button a {
+    text-decoration: none;
+    font-weight: 550;
+    color: #ffffff;
+}
+
+.signup-button:hover {
+    background-color: #000000;
+}
+
+.signup-button a:hover {
+    color: rgb(255, 255, 255);
+}

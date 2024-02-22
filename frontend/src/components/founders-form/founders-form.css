@@ -1,0 +1,52 @@
+.comp-details-form {
+    padding-top: 90px;
+    padding-left: 10%;
+    padding-bottom: 90px;
+}
+
+.comp-details-head {
+    font-size: 45px;
+    color: #007aff;
+}
+
+.comp-details-subhead {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.founders-form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.founders-form-input {
+    display: block;
+    margin-bottom: 20px;
+    width: 300px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #818181;
+    border-radius: 5px;
+}
+
+.comp-form-head {
+    text-decoration: underline;
+}
+
+.comp-form-container {
+    display: flex;
+    gap: 30px;
+}
+
+.founders-form-button {
+    background-color: #007bff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}

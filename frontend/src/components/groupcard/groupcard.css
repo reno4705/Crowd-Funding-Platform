@@ -1,0 +1,15 @@
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 110px;
+}
+
+.card-row > * {
+    flex: 1 1 1;
+}
+
+.gc-head {
+    padding-left: 110px;
+    color: #007aff;
+    font-size: 30px;
+}

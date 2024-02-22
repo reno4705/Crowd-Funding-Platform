@@ -1,0 +1,39 @@
+.home-head {
+    text-align: center;
+    padding: 35px;
+    font-weight: 700;
+    color: #007aff;
+    font-size: 35px;
+}
+
+.home-row {
+    padding-left: 25%;
+    padding-right: 20%;
+    padding-top: 10px;
+    display: flex;
+    column-gap: 10px;
+}
+
+.home-column {
+    width: 40%;
+    padding: 10px;
+    height: 300px;
+    text-align: center;
+}
+
+.col-img {
+    height: 150px;
+    width: 150px;
+}
+
+.col-head {
+    font-weight: 600;
+    font-size: 22px;
+    padding-top: 20px;
+}
+
+.col-link a {
+    font-size: 18px;
+    text-decoration: underline;
+    color: #007aff;
+}
