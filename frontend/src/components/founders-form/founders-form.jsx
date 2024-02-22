@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 const Founders_form = () => {
     const navigate = useNavigate();
-    const notify = toast.success('Details Saved 😍😍');
-    const enotify = toast.error('Error Occured ☠️☠️')
+    const notify = () => toast.success('Details Saved 😍😍');
+    const enotify = () => toast.error('Error Occured ☠️☠️');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -63,6 +63,7 @@ const Founders_form = () => {
 
         }
         catch (err) {
+            enotify();
             console.error(err);
             return;
         }
