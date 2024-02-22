@@ -5,7 +5,7 @@ import axios from 'axios'
 import signimg from "../Assets/log.svg"
 import './signup.css'
 import background from "../Assets/background.png";
-
+import { ToastContainer, toast } from 'react-toastify';
 const Login = () => {
     const [users, setUsers] = useState([])
     const [email, setEmail] = useState('')
@@ -31,7 +31,7 @@ const Login = () => {
             const response = await axios
             .post('http://localhost:3001/login', { email, password })
             const token = response.data.token
-            alert('Login successful')
+            
             setEmail('')
             setPassword('')
             fetchUsers();
@@ -44,6 +44,8 @@ const Login = () => {
     }
 
     return (
+        <>
+        <ToastContainer/>
         <login className="login-body">
             <div className="sign-container" style={{backgroundImage: `url(${background})`,
                                                     backgroundRepeat: "no-repeat",
@@ -59,7 +61,7 @@ const Login = () => {
                         </div>
 
                         <div className="input-field">
-                            <input type="password" name="password" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="sign-input" required />
+                            <input type="password" name="password" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="sign-input"  />
                         </div>
 
                         <button type="submit" className="sign-submit">Log in</button>
@@ -69,6 +71,7 @@ const Login = () => {
                 </div>
             </div>
         </login>
+        </>
     )
 }
 
