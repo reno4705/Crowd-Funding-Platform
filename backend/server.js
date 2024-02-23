@@ -10,6 +10,7 @@ const SECRET_KEY = 'secretkey';
 const fs = require("fs");
 const CompanyModel = require("./models/companySchema")
 const multer = require("multer")
+const { error } = require('console')
 
 // connect to express app
 const app = express()
@@ -85,21 +86,46 @@ app.post('/login', async (req, res) => {
 
 app.get("/test", (req, res)=> res.send("this is working fine"));
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads");
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
-});
 
-const upload = multer({ storage: storage});
+
+const upload = multer({dest : '/uploads'});
 
 app.post("/uploadcompany", upload.single("testImage"),  async (req,res) => {
-
-
-    console.log(req.body);
+    
+try{
+  const newCompany = new CompanyModel(
+    {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            phone: req.body.phone,
+            compname: req.body.compname,
+            category: req.body.category,
+            compwebsite: req.body.compwebsite,
+            country: req.body.country,
+            city: req.body.city,
+            img: {
+                data: req.file.buffer, 
+                contentType: req.file.mimetype
+            }
+    }
+    
+  );
+  const response = await newCompany.save();
+  if(response){
+    console.log(`File Saved Successfully`);
+    res.status(201).json({
+        message :'File Saved successfully'
+    })
+  }
+}
+catch(err){
+  console.error(err);
+  res.status(501).json({
+    message : 'Internal Server Error'
+  })
+}
+   
  
 });
 
