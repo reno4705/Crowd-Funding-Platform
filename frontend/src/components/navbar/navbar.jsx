@@ -1,7 +1,6 @@
 import React from 'react'
 import './nav.css'
 import logo from '../Assets/logo.png'
-import searchbutton from '../Assets/search-button-png-23502.png'
 import {Link,useNavigate} from 'react-router-dom'
 
 
@@ -19,8 +18,6 @@ const Nav = () => {
     <nav>
       <div className='navstart'>
         <img src={logo} alt='logo' className='logo'/>
-        <input type="text" placeholder='search...' className='searchbox'/> 
-        <img src={searchbutton} className='serbut'alt='search'/>
       </div>   
       <div>
         <ul className='navbar'>

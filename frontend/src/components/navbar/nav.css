@@ -3,11 +3,6 @@
     padding-right: 70px;
 }
 
-.serbut {
-    height: 30px;
-    padding-left: 10px;
-}
-
 * {
     margin: 0;
 }
@@ -27,14 +22,6 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
-
-.searchbox {
-    padding: 4px;
-    color: #000000;
-    font-size: 18px;
-    max-width: 500px;
-}
-
 
 .navbar {
     display: flex;

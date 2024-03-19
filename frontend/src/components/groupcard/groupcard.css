@@ -1,11 +1,15 @@
 .card-row {
     display: flex;
     flex-wrap: wrap;
+    padding-top: 20px;
     padding-left: 110px;
+    padding-right: 110px;
+    gap: 90px;
+    padding-bottom: 100px;
 }
 
 .card-row > * {
-    flex: 1 1 1;
+    flex: 1 1 1 ;
 }
 
 .gc-head {

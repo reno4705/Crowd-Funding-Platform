@@ -10,14 +10,15 @@ const SECRET_KEY = 'secretkey';
 const fs = require("fs");
 const CompanyModel = require("./models/companySchema")
 const multer = require("multer")
-const { error } = require('console')
+var nodemailer = require('nodemailer');
+const dotenv = require('dotenv')
+dotenv.config();
 
 // connect to express app
 const app = express()
 
 //connect mongodb
-
-const dbURI = 'mongodb+srv://reno:benedict4705@cluster0.i4j9ndf.mongodb.net/Cluster0?retryWrites=true&w=majority'
+const dbURI = process.env.DATABASE_URL
 mongoose
 .connect(dbURI)
 .then(() => {
@@ -29,14 +30,17 @@ mongoose
     console.log('Unable to connect to Server and/or MongoDB', error)
 })
 
-//middleware
+//-------------------middleware--------------------------
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors())
+// app.use(cors({credentials:true}))
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            
+}
+app.use(cors(corsOptions));
 
-
-
-// REGISTER
+//----------------------------REGISTER-------------------------
 //POST REGISTER
 app.post('/register', async (req, res) => {
     try {
@@ -51,6 +55,7 @@ app.post('/register', async (req, res) => {
 })
 
 //GET Registered Users
+
 app.get('/register', async (req, res) => {
     try {
         const users = await User.find()
@@ -61,75 +66,137 @@ app.get('/register', async (req, res) => {
     }
 })
 
-//LOGIN
-
+//----------------------------LOGIN-----------------------------------
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body
         const user = await User.findOne({ email })
         if (!user) {
-            return res.status(401).json({ error: 'Invalid credentials'})
+            return res.status(400).json({ error: 'Invalid credentials'})
         }
         const isPasswordValid = await bcrypt.compare(password, user.password)
         if(!isPasswordValid) {
             return res.status(401).json({ error: 'Invalid credentials' })
         }
         const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1hr' })
-        res.json({ message: 'Login successful' })
+        res.send({ message: 'Login successful' })
     } catch (error) {
         res.status(500).json({ error: 'Error logging in' })
     }
 })
 
-///////////////////////////////////////////////////////
-//Company card API
+//---------------Company card API------------------------
+  
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "public/images");
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now();
+      cb(null, uniqueSuffix + file.originalname);
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 
-app.get("/test", (req, res)=> res.send("this is working fine"));
-
-
-
-const upload = multer({dest : '/uploads'});
-
-app.post("/uploadcompany", upload.single("testImage"),  async (req,res) => {
-    
-try{
-  const newCompany = new CompanyModel(
-    {
+app.post("/uploadcompany", upload.single("testImage"),  async(req,res) => {
+    console.log(req.body);
+    console.log(req.file);
+    const imageName = req.file.filename;
+    try{
+        await CompanyModel.create (
+        {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            phone: req.body.phone,
-            compname: req.body.compname,
+            phoneNumber: req.body.phoneNumber,
+            companyName: req.body.companyName,
             category: req.body.category,
             compwebsite: req.body.compwebsite,
             country: req.body.country,
             city: req.body.city,
-            img: {
-                data: req.file.buffer, 
-                contentType: req.file.mimetype
-            }
+            img: imageName
+        });
+        // const response = await newCompany.save();
+        res.json({ status: "ok" });
     }
-    
-  );
-  const response = await newCompany.save();
-  if(response){
-    console.log(`File Saved Successfully`);
-    res.status(201).json({
-        message :'File Saved successfully'
-    })
-  }
-}
-catch(err){
-  console.error(err);
-  res.status(501).json({
-    message : 'Internal Server Error'
-  })
-}
-   
- 
+    catch(error){
+        res.json({ status: error });
+    }
 });
 
-app.get("/uploadcompany",async (req,res)=>{
-    const allData = await CompanyModel.find();
-    res.json(allData)
+app.use(express.static('public'))
+app.get("/uploadcompany", (req,res)=>{
+    try {
+        CompanyModel.find().then((data) => {
+          res.send({ data });
+        });
+    } catch (error) {
+        res.json({ status: error });
+    }
+});
+
+//-------------------forgot-password---------------------------
+
+app.post("/forgot-password", async(req, res) => {
+    const {email} = req.body;
+    const olduser = await User.findOne({ email });
+    try {
+        if(!olduser) {
+            return res.send({Status: "User not existed"})
+        } 
+        console.log('Email:'+ email + ' userid:' + olduser._id);
+        const token = jwt.sign({id: olduser._id}, "jwt_secret_key", {expiresIn: "1d"})
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'benedictreno47@gmail.com',
+              pass: 'jlwh dhbn qyez hxsd'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'youremail@gmail.com',
+            to: email,
+            subject: 'Reset Password Link',
+            text: `http://localhost:3000/reset_password/${olduser._id}/${token}`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+              return res.send({Status: "Success"});
+            }
+          });
+    } catch (err) {
+        console.log("Error in forgot password");
+        res.status(400).json({
+            message : 'Error sending mail'
+        })
+    }
+});
+
+app.post('/reset-password/:id/:token', async(req, res) => {
+    const {id, token} = req.params;
+    const {password} = req.body;
+
+    try {
+        jwt.verify(token, "jwt_secret_key", (err, decoded) => {
+        if(err) {
+            return res.json({Status: "Error with token"})
+        } else {
+            bcrypt.hash(password, 10)
+            .then(hash => {
+                User.findByIdAndUpdate({_id: id}, {password: hash})
+                .then(u => res.send({Status: "Success"}))
+                .catch(err => res.send({Status: err}))
+            })
+            .catch(err => res.send({Status: err}))
+        }
+    })
+    } catch (err) {
+        return res.json("Error in reset password")
+    }
 })

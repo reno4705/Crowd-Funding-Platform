@@ -7,8 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Founders_form = () => {
     const navigate = useNavigate();
-    const notify = () => toast.success('Details Saved 😍😍');
-    const enotify = () => toast.error('Error Occured ☠️☠️');
+    const notify = () => toast.success('Details Saved');
+    const enotify = () => toast.error('Error Occured');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -24,7 +24,6 @@ const Founders_form = () => {
     const handleFile = (e) => {
         const FILE = e.target.files[0];
         setFile(FILE);
-
     }
 
     const handleSubmit = async (e) => {
@@ -58,20 +57,12 @@ const Founders_form = () => {
                 enotify();
                 return;
             }
-
-
-
         }
         catch (err) {
             enotify();
             console.error(err);
             return;
         }
-
-
-
-
-
     };
 
 
@@ -119,6 +110,7 @@ const Founders_form = () => {
                         <div>
                             <label className="founders-form-label">Category:</label>
                             <select name="category" className="founders-form-input" value={category} onChange={(e) => setCategory(e.target.value)}>
+                                <option value="Art">Select</option>
                                 <option value="Art">Art</option>
                                 <option value="Comics">Comics</option>
                                 <option value="Crafts">Crafts</option>
