@@ -126,6 +126,7 @@ const Founders_form = () => {
                                 <option value="Publishing">Publishing</option>
                                 <option value="Technology">Technology</option>
                                 <option value="Theater">Theater</option>
+                                <option value="Automobile">Automobile</option>
                             </select>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Nav from "../navbar/navbar";
 import axios from "axios";
+import "./investor.css";
 
 const Investor = () => {
   const [image, setImage] = useState([]);
@@ -21,33 +22,23 @@ const Investor = () => {
         <Nav />
       </div>
 
+      <div>
+        <h2 className="investor-head">Recently Launched</h2>
+      </div>
+
       <div className="investor-page-card">
         {image == null
           ? ""
           : image.map((data) => {
               return (
                 <div>
-                  <div className="gallery-col">
+                  <div className="investor-gallery-col">
                     <img
                       src={`http://localhost:3001/images/${data.img}`}
                       alt="company1"
-                      className="gallery-img"
+                      className="investor-gallery-img"
                     />
-                    <h2 className="gallery-head">{data.companyName}</h2>
-                    <div className="details-row">
-                      <div className="details-col">
-                        <h6 className="details-val">32</h6>
-                        <p className="details-name">Raised</p>
-                      </div>
-                      <div className="details-col">
-                        <h6 className="details-val">324</h6>
-                        <p className="details-name">Investors</p>
-                      </div>
-                      <div className="details-col">
-                        <h6 className="details-val">4563</h6>
-                        <p className="details-name">Min.Investment</p>
-                      </div>
-                    </div>
+                    <h2 className="investor-gallery-head">{data.companyName}</h2>
                   </div>
               </div>
               );

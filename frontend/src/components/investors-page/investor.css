@@ -6,3 +6,28 @@
     gap: 90px;
     padding-bottom: 100px;
 }
+
+.investor-head {
+    padding-top: 100px;
+    padding-left: 110px;
+    font-weight: 700;
+    color: #007aff;
+    font-size: 35px;
+}
+
+.investor-gallery-head {
+    padding-top: 7px;
+}
+
+.investor-gallery-img {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.investor-gallery-col {
+    width: 400px;
+    height: 240px;
+    padding: 12px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}

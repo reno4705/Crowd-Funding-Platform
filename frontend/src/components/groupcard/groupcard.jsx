@@ -7,6 +7,7 @@ import r1c3 from '../Assets/r1c3.webp'
 import r2c1 from '../Assets/r2c1.webp'
 import r2c2 from '../Assets/r2c2.webp'
 import r2c3 from '../Assets/r2c3.webp'
+import {Link} from 'react-router-dom'
 
 const Groupcard = () => {
     return (
@@ -60,6 +61,9 @@ const Groupcard = () => {
                 count="12481"
                 minamount="₹50"
                 />
+            </div>
+            <div className="show-but-cont">
+                <button className="show-button"><Link to='/investor'>Show All Startups</Link></button>
             </div>
         </groupcard>    
     )
